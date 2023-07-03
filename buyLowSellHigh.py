@@ -4,6 +4,8 @@ from pandas_datareader import data as pdr
 import yfinance as yf
 import pandas as pd
 
+from SnR import getData
+
 start_date = '2014-01-01'
 end_date = '2018-01-01'
 
@@ -11,7 +13,7 @@ yf.pdr_override()
 
 
 def main():
-    goog_data = pdr.get_data_yahoo("GOOG", start=start_date, end=end_date)
+    goog_data = getData()
     goog_data_signal = pd.DataFrame(index=goog_data.index)
     goog_data_signal['price'] = goog_data['Adj Close']
     goog_data_signal['daily_difference'] = goog_data_signal['price'].diff()
@@ -27,7 +29,7 @@ def main():
              goog_data_signal.price[goog_data_signal.positions == 1.0], "^", markersize=5, color="m")
     ax1.plot(goog_data_signal.loc[goog_data_signal.positions == -1.0].index,
              goog_data_signal.price[goog_data_signal.positions == -1.0], "v", markersize=5, color="m")
-    #plt.show()
+    # plt.show()
 
     # Bactkesting
     initial_capital = float(1000.0)
@@ -40,5 +42,6 @@ def main():
     portfolio['total'] = portfolio['positions'] + portfolio['cash']
 
     print(portfolio)
+
 
 main()
