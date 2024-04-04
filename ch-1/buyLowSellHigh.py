@@ -3,15 +3,16 @@ import matplotlib.pyplot as plt
 import pandas_datareader.data as pdr
 import pandas as pd
 import datetime as dt
+import os
 
 # from SnR import getData
 
 start_date = dt.datetime(2020, 1, 29)
 end_date = dt.datetime.today()
 
-goog_data = pdr.DataReader('GOOG', 'yahoo', start_date, end_date)
-goog_data.head()
-# print(goog_data.head(), goog_data)
+goog_data = pdr.DataReader('GOOG', 'av-weekly-adjusted', start_date, end_date, api_key=os.getenv('ALPHAVANTAGE_API_KEY'))
+print(goog_data.head(), goog_data)
+print('-------------------------------------')
 # def main():
 #     goog_data = getData()
 #     goog_data_signal = pd.DataFrame(index=goog_data.index)
