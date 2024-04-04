@@ -9,7 +9,7 @@ import datetime as dt
 start_date = dt.datetime(2020, 1, 29)
 end_date = dt.datetime.today()
 
-goog_data = pdr.DataReader('GOOG', 'yahoo-actions', start_date, end_date)
+goog_data = pdr.DataReader('GOOG', 'yahoo', start_date, end_date)
 goog_data.head()
 # print(goog_data.head(), goog_data)
 # def main():
